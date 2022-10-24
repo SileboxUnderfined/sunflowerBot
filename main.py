@@ -5,6 +5,7 @@ from vk_api.utils import get_random_id as rand
 from vk_api.keyboard import VkKeyboard
 
 app = Flask(__name__,template_folder='templates')
+app.secret_key = envv['SECRET_KEY']
 
 @app.route('/',methods=['POST','GET'])
 def index():
@@ -19,7 +20,7 @@ def add_photos():
         file = request.files['file']
         if file.filename == '':
             flash('Файл не выбран')
-            
+
         if file:
             filename = file.filename
             file.save('photos', filename)
