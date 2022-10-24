@@ -19,7 +19,7 @@ def add_photos():
         if 'file' not in request.files:
             flash('Файла не существует')
 
-        file = request.files['file']
+        file = request.files['photo']
         if file.filename == '':
             flash('Файл не выбран')
 
