@@ -1,6 +1,7 @@
 from flask import Flask, request
 from os import environ as envv
 from vk_api import VkApi, VkUpload
+from vk_api.utils import get_random_id as rand
 
 app = Flask(__name__)
 
@@ -17,11 +18,16 @@ def bot():
     if not data or 'type' not in data: return 'not ok'
     if data['secret'] == envv['SECRET_KEY']:
         if data['type'] == 'confirmation': return envv['CONFIRMATION_KEY']
+        if data['type'] == 'message_new':
+            message = data['object']['message']
+            if message.text == 'начать': sendMessage(peer_id=message['peer_id'],random_id=rand(),message='hello world!')
+
     return 'ok'
 
 if __name__ in "__main__":
     botSession = VkApi(token=envv['VK_API_KEY'])
     bs = botSession.get_api()
+    sendMessage = bs.messages.send
     vupl = VkUpload(bs)
 
     app.run(host=envv['IP_ADDRESS'],port=envv['PORT'],debug=True)
