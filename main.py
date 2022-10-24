@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, flash, redirect
 from os import environ as envv, listdir
 from vk_api import VkApi, VkUpload
 from vk_api.utils import get_random_id as rand
@@ -12,11 +12,22 @@ def index():
 
 @app.route('/add_photos',methods=['POST','GET'])
 def add_photos():
-    photos = listdir('photos')
     if request.method == 'POST':
-        pass
+        if 'file' not in request.files:
+            flash('Файла не существует')
+            return redirect(request.url)
 
-    return render_template('add_photos.html', photos=len(listdir('photos')))
+        file = request.files['file']
+        if file.filename == '':
+            flash('Файл не выбран')
+            return redirect(request.url)
+        if file:
+            filename = file.filename
+            file.save('photos', filename)
+            photos = listdir('photos')
+            
+
+    return render_template('add_photos.html', photos=len(photos))
 
 @app.route(envv['BOT_ADDRESS'], methods=['POST'])
 def bot():
@@ -37,6 +48,7 @@ def bot():
     return 'ok'
 
 if __name__ in "__main__":
+    photos = listdir('photos')
     botSession = VkApi(token=envv['VK_API_KEY'])
     bs = botSession.get_api()
     sendMessage = bs.messages.send
