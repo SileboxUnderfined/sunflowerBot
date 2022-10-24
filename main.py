@@ -11,7 +11,7 @@ def index():
 @app.route('/add_photos',methods=['POST','GET'])
 def add_photos(): pass
 
-@app.route(envv['BOT_ADDRESS'], methods=['POST','GET'])
+@app.route(envv['BOT_ADDRESS'], methods=['POST'])
 def bot():
     data = request.get_json(force=True,silent=True)
     if not data or 'type' not in data: return 'not ok'
