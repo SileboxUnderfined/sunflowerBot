@@ -1,8 +1,9 @@
-from flask import Flask, request, render_template, flash, redirect
+from flask import Flask, request, render_template, flash
 from os import environ as envv, listdir
 from vk_api import VkApi, VkUpload
 from vk_api.utils import get_random_id as rand
 from vk_api.keyboard import VkKeyboard
+from random import choice
 
 app = Flask(__name__,template_folder='templates')
 app.secret_key = envv['SECRET_KEY']
@@ -52,10 +53,15 @@ def bot():
                                                           random_id=rand(),message=envv['ABOUT_MESSAGE'],
                                                           attachment=envv['ABOUT_ATTACHMENT'])
 
+            elif message['text'] == f'{envv["TO_BOT"]} Хочу картинку' or 'Хочу картинку':
+                photo = choice(getPhotos())
+                result = vupl.photo_messages(photo,message['peer_id'])
+                attach = f'photo{result["owner_id"]}_{result["id"]}'
+                sendMessage(peer_id=message['peer_id'], random_id=rand(),message=envv['GET_PHOTO_MESSAGE'],attachment=attach)
+
     return 'ok'
 
 if __name__ in "__main__":
-    photos = getPhotos()
     botSession = VkApi(token=envv['VK_API_KEY'])
     bs = botSession.get_api()
     sendMessage = bs.messages.send
