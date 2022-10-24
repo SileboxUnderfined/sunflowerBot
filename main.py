@@ -29,7 +29,7 @@ def add_photos():
             flash('Файл не выбран')
 
         if file:
-            filename = getFilename()
+            filename = getFilename() + 'jpg'
             import os.path
             file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
 
