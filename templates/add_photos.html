@@ -5,7 +5,7 @@
         <title>Добавление фотографий в бота</title>
     </head>
     <body>
-        <h1>количество фотографий: {{len(photos)}}</h1>
+        <h1>количество фотографий: {% len(photos) %}</h1>
         <form enctype="multipart/form-data" method="post">
             <input type="file" name="photo" multiple accept="image/*,image/jpeg">
             <input type="submit" value="Загрузить">
