@@ -25,7 +25,8 @@ def add_photos():
 
         if file:
             filename = file.filename
-            file.save('photos', filename)
+            import os.path
+            file.save(os.path.join('photos'), filename)
 
 
     return render_template('add_photos.html', photos=len(getPhotos()))
