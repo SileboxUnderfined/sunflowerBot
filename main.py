@@ -4,6 +4,8 @@ from vk_api import VkApi, VkUpload
 from vk_api.utils import get_random_id as rand
 from vk_api.keyboard import VkKeyboard
 from random import choice
+from zipfile import ZipFile
+from io import BytesIO
 
 app = Flask(__name__,template_folder='templates')
 app.secret_key = envv['SECRET_KEY']
@@ -14,6 +16,10 @@ def getFilename():
     tphotos = getPhotos()
     if len(tphotos) == 0: return '1'
     else: return str(int(tphotos[-1].replace('.jpg','')) + 1)
+
+def saveFile(file,filename):
+    import os.path
+    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
 @app.route('/',methods=['POST','GET'])
 def index():
@@ -30,10 +36,15 @@ def add_photos():
             flash('Файл не выбран')
 
         if file:
-            filename = getFilename() + '.jpg'
-            import os.path
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+            for f in file:
+                if f.filename.split('.')[1] != 'zip': saveFile(file,getFilename())
+                else:
+                    buffer = BytesIO()
+                    file.save(buffer)
+                    buffer.seek(0)
 
+                    with ZipFile(buffer,'r') as myzip:
+                        myzip.extractall(path='photos')
 
     return render_template('add_photos.html', photos=len(getPhotos()))
 
