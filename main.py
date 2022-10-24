@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from os import environ as envv
 from vk_api import VkApi, VkUpload
 from vk_api.utils import get_random_id as rand
@@ -6,12 +6,17 @@ from vk_api.keyboard import VkKeyboard
 
 app = Flask(__name__)
 
+
 @app.route('/',methods=['POST','GET'])
 def index():
     return 'hello world'
 
 @app.route('/add_photos',methods=['POST','GET'])
-def add_photos(): pass
+def add_photos():
+    if request.method == 'POST':
+        pass
+
+    return render_template('add_photos.html')
 
 @app.route(envv['BOT_ADDRESS'], methods=['POST'])
 def bot():
