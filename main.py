@@ -1,11 +1,10 @@
 from flask import Flask, request, render_template
-from os import environ as envv
+from os import environ as envv, listdir
 from vk_api import VkApi, VkUpload
 from vk_api.utils import get_random_id as rand
 from vk_api.keyboard import VkKeyboard
 
 app = Flask(__name__,template_folder='templates')
-
 
 @app.route('/',methods=['POST','GET'])
 def index():
@@ -16,7 +15,7 @@ def add_photos():
     if request.method == 'POST':
         pass
 
-    return render_template('add_photos.html')
+    return render_template('add_photos.html', photos=listdir('photos'))
 
 @app.route(envv['BOT_ADDRESS'], methods=['POST'])
 def bot():
