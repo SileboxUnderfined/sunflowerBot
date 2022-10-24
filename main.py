@@ -53,7 +53,7 @@ def bot():
                                                           random_id=rand(),message=envv['ABOUT_MESSAGE'],
                                                           attachment=envv['ABOUT_ATTACHMENT'])
 
-            elif message['text'] == f'{envv["TO_BOT"]} Хочу картинку' or 'Хочу картинку':
+            elif message['text'] == f'{envv["TO_BOT"]} Хочу картинку' or message['text'] == 'Хочу картинку':
                 photo = choice(getPhotos())
                 result = vupl.photo_messages(photo,message['peer_id'])
                 attach = f'photo{result["owner_id"]}_{result["id"]}'
