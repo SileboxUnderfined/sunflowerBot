@@ -5,7 +5,8 @@ from vk_api import VkApi, VkUpload
 app = Flask(__name__)
 
 @app.route('/',methods=['POST','GET'])
-def index(): pass
+def index():
+    return 'hello world'
 
 @app.route('/add_photos',methods=['POST','GET'])
 def add_photos(): pass
