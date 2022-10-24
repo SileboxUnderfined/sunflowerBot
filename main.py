@@ -22,7 +22,7 @@ def bot():
         if data['type'] == 'message_new':
             message = data['object']['message']
             if message['text'] == 'начать': sendMessage(peer_id=message['peer_id'],
-                                                        random_id=rand(),message='hello world!',
+                                                        random_id=rand(),message=envv['START_MESSAGE'],
                                                         keyboard=keyboard.get_keyboard())
 
     return 'ok'
