@@ -27,7 +27,7 @@ def add_photos():
         if file:
             filename = file.filename
             import os.path
-            file.save(filename,os.path.join(app.config['UPLOAD_FOLDER']))
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
 
 
     return render_template('add_photos.html', photos=len(getPhotos()))
