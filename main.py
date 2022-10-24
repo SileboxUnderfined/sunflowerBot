@@ -7,6 +7,9 @@ app = Flask(__name__)
 @app.route('/',methods=['POST','GET'])
 def index(): pass
 
+@app.route('/add_photos',methods=['POST','GET'])
+def add_photos(): pass
+
 @app.route(envv['BOT_ADDRESS'], methods=['POST'])
 def bot():
     data = request.get_json(force=True,silent=True)
