@@ -18,4 +18,4 @@ if __name__ in "__main__":
     bs = botSession.get_api()
     vupl = VkUpload(bs)
 
-    app.run(host='0.0.0.0',port=envv['PORT'],debug=True)
+    app.run(host=envv['IP_ADDRESS'],port=envv['PORT'],debug=True)
