@@ -12,6 +12,7 @@ def index():
 
 @app.route('/add_photos',methods=['POST','GET'])
 def add_photos():
+    photos = listdir('photos')
     if request.method == 'POST':
         pass
 
@@ -29,7 +30,7 @@ def bot():
                                                         random_id=rand(),message=envv['START_MESSAGE'],
                                                         keyboard=keyboard.get_keyboard())
 
-            elif message['text'] == f'{envv["TO_BOT"]} О мне': sendMessage(peer_id=message['peer_id'],
+            elif message['text'] == f'{envv["TO_BOT"]} О мне' or 'О мне': sendMessage(peer_id=message['peer_id'],
                                                           random_id=rand(),message=envv['ABOUT_MESSAGE'],
                                                           attachment=envv['ABOUT_ATTACHMENT'])
 
