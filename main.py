@@ -6,6 +6,7 @@ from vk_api.keyboard import VkKeyboard
 
 app = Flask(__name__,template_folder='templates')
 app.secret_key = envv['SECRET_KEY']
+app.config['UPLOAD_FOLDER'] = 'photos'
 
 def getPhotos(): return listdir('photos')
 
@@ -26,7 +27,7 @@ def add_photos():
         if file:
             filename = file.filename
             import os.path
-            file.save(os.path.join('photos'), filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER']), filename)
 
 
     return render_template('add_photos.html', photos=len(getPhotos()))
