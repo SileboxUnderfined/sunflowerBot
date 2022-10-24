@@ -4,7 +4,7 @@ from vk_api import VkApi, VkUpload
 from vk_api.utils import get_random_id as rand
 from vk_api.keyboard import VkKeyboard
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder='templates')
 
 
 @app.route('/',methods=['POST','GET'])
