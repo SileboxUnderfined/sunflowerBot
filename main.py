@@ -2,6 +2,7 @@ from flask import Flask, request
 from os import environ as envv
 from vk_api import VkApi, VkUpload
 from vk_api.utils import get_random_id as rand
+from vk_api.keyboard import VkKeyboard
 
 app = Flask(__name__)
 
@@ -29,5 +30,10 @@ if __name__ in "__main__":
     bs = botSession.get_api()
     sendMessage = bs.messages.send
     vupl = VkUpload(bs)
+
+    keyboard = VkKeyboard()
+    keyboard.add_button('Хочу картинку')
+    keyboard.add_line()
+    keyboard.add_button('О боте')
 
     app.run(host=envv['IP_ADDRESS'],port=envv['PORT'],debug=True)
