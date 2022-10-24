@@ -9,6 +9,10 @@ app.secret_key = envv['SECRET_KEY']
 app.config['UPLOAD_FOLDER'] = 'photos'
 
 def getPhotos(): return listdir('photos')
+def getFilename():
+    tphotos = getPhotos()
+    if len(tphotos) == 0: return '1'
+    else: return str(int(tphotos[-1].replace('.jpg','')) + 1)
 
 @app.route('/',methods=['POST','GET'])
 def index():
@@ -25,7 +29,7 @@ def add_photos():
             flash('Файл не выбран')
 
         if file:
-            filename = file.filename
+            filename = getFilename()
             import os.path
             file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
 
