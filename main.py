@@ -25,7 +25,7 @@ def bot():
                                                         random_id=rand(),message=envv['START_MESSAGE'],
                                                         keyboard=keyboard.get_keyboard())
 
-            elif message['text'] == 'О мне': sendMessage(peer_id=message['peer_id'],
+            elif message['text'] == f'{envv["TO_BOT"]} О мне': sendMessage(peer_id=message['peer_id'],
                                                           random_id=rand(),message=envv['ABOUT_MESSAGE'],
                                                           attachment=envv['ABOUT_ATTACHMENT'])
 
