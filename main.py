@@ -21,7 +21,9 @@ def bot():
         if data['type'] == 'confirmation': return envv['CONFIRMATION_KEY']
         if data['type'] == 'message_new':
             message = data['object']['message']
-            if message['text'] == 'начать': sendMessage(peer_id=message['peer_id'],random_id=rand(),message='hello world!',keyboard=keyboard.get_keyboard())
+            if message['text'] == 'начать': sendMessage(peer_id=message['peer_id'],user_id=message['user_id'],
+                                                        random_id=rand(),message='hello world!',
+                                                        keyboard=keyboard.get_keyboard())
 
     return 'ok'
 
