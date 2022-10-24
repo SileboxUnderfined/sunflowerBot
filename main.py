@@ -15,7 +15,7 @@ def add_photos():
     if request.method == 'POST':
         pass
 
-    return render_template('add_photos.html', photos=listdir('photos'))
+    return render_template('add_photos.html', photos=len(listdir('photos')))
 
 @app.route(envv['BOT_ADDRESS'], methods=['POST'])
 def bot():
