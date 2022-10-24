@@ -7,6 +7,8 @@ from vk_api.keyboard import VkKeyboard
 app = Flask(__name__,template_folder='templates')
 app.secret_key = envv['SECRET_KEY']
 
+def getPhotos(): return listdir('photos')
+
 @app.route('/',methods=['POST','GET'])
 def index():
     return 'hello world'
@@ -24,10 +26,9 @@ def add_photos():
         if file:
             filename = file.filename
             file.save('photos', filename)
-            photos = listdir('photos')
 
 
-    return render_template('add_photos.html', photos=len(photos))
+    return render_template('add_photos.html', photos=len(getPhotos()))
 
 @app.route(envv['BOT_ADDRESS'], methods=['POST'])
 def bot():
@@ -48,7 +49,7 @@ def bot():
     return 'ok'
 
 if __name__ in "__main__":
-    photos = listdir('photos')
+    photos = getPhotos()
     botSession = VkApi(token=envv['VK_API_KEY'])
     bs = botSession.get_api()
     sendMessage = bs.messages.send
