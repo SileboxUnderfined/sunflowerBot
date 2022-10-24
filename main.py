@@ -16,7 +16,7 @@ def bot():
     data = request.get_json(force=True,silent=True)
     if not data or 'type' not in data: return 'not ok'
     if data['secret'] == envv['SECRET_KEY']:
-        if data['type'] == 'confirmation' and data['group_id'] == envv['GROUP_ID']: return envv['CONFIRMATION_KEY']
+        if data['type'] == 'confirmation': return envv['CONFIRMATION_KEY']
     return 'ok'
 
 if __name__ in "__main__":
