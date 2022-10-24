@@ -15,17 +15,16 @@ def add_photos():
     if request.method == 'POST':
         if 'file' not in request.files:
             flash('Файла не существует')
-            return redirect(request.url)
 
         file = request.files['file']
         if file.filename == '':
             flash('Файл не выбран')
-            return redirect(request.url)
+            
         if file:
             filename = file.filename
             file.save('photos', filename)
             photos = listdir('photos')
-            
+
 
     return render_template('add_photos.html', photos=len(photos))
 
