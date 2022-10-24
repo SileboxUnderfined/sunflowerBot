@@ -34,6 +34,6 @@ if __name__ in "__main__":
     keyboard = VkKeyboard()
     keyboard.add_button('Хочу картинку')
     keyboard.add_line()
-    keyboard.add_button('О боте')
+    keyboard.add_button('О мне')
 
     app.run(host=envv['IP_ADDRESS'],port=envv['PORT'],debug=True)
