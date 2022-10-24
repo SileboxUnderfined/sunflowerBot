@@ -11,7 +11,7 @@ def index():
 @app.route('/add_photos',methods=['POST','GET'])
 def add_photos(): pass
 
-@app.route(envv['BOT_ADDRESS'], methods=['POST'])
+@app.route(envv['BOT_ADDRESS'], methods=['POST','GET'])
 def bot():
     data = request.get_json(force=True,silent=True)
     if data['type'] == 'confirmation' and data['group_id'] == envv['GROUP_ID']: return envv['CONFIRMATION_KEY']
