@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, flash
-from os import environ as envv, listdir, mkdir, rename
+from os import environ as envv, listdir, mkdir, rename, rmdir
 from shutil import move
 from os.path import isdir
 from vk_api import VkApi, VkUpload
@@ -51,6 +51,7 @@ def add_photos():
                         myzip.extractall(path='temp')
 
                     for j in listdir('temp'):
+                        if isdir('temp/' + j): rmdir('temp/' + j)
                         move('temp/' + j, 'photos')
                         filename = getFilename() + '.jpg'
                         rename('photos/' + j,filename)
