@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, flash
-from os import environ as envv, listdir, mkdir, rename, rmdir
+from os import environ as envv, listdir, mkdir, rename
+from os.path import join as opjoin
 from shutil import move, rmtree
 from os.path import isdir
 from vk_api import VkApi, VkUpload
@@ -20,8 +21,7 @@ def getFilename():
     else: return str(int(tphotos[-1].replace('.jpg','')) + 1)
 
 def saveFile(file,filename):
-    import os.path
-    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    file.save(opjoin(app.config['UPLOAD_FOLDER'], filename))
 
 @app.route('/',methods=['POST','GET'])
 def index():
@@ -51,12 +51,12 @@ def add_photos():
                         myzip.extractall(path='temp')
 
                     for j in listdir('temp'):
-                        if isdir('temp/' + j):
-                            rmtree('temp/' + j)
+                        if isdir(opjoin('temp/',j)):
+                            rmtree(opjoin('temp/',j))
                         else:
                             filename = getFilename() + '.jpg'
-                            move('temp/' + j, 'photos')
-                            rename('photos/' + j,filename)
+                            move(opjoin('temp/' + j), 'photos/')
+                            rename(opjoin('photos/' + j),opjoin('photos/' + filename))
 
 
     return render_template('add_photos.html', photos=len(getPhotos()))
