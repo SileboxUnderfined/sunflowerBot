@@ -74,7 +74,7 @@ def bot():
                                                         keyboard=keyboard.get_keyboard())
 
             elif message['text'] == f'{envv["TO_BOT"]} О мне' or message['text'] == 'О мне': sendMessage(peer_id=message['peer_id'],
-                                                          random_id=rand(),message=envv['ABOUT_MESSAGE'],
+                                                          random_id=rand(),message=envv['ABOUT_MESSAGE'].replace('\n','\n'),
                                                           attachment=envv['ABOUT_ATTACHMENT'])
 
             elif message['text'] == f'{envv["TO_BOT"]} Хочу картинку' or message['text'] == 'Хочу картинку':
