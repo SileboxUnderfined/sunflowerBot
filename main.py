@@ -40,7 +40,7 @@ def add_photos():
 
         if file:
             for f in file:
-                if f.filename.split('.')[1] != 'zip': saveFile(f,getFilename())
+                if f.filename.split('.')[1] != 'zip': saveFile(f,getFilename() + '.jpg')
                 else:
                     buffer = BytesIO()
                     f.save(buffer)
