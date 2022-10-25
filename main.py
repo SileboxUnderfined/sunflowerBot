@@ -18,7 +18,7 @@ def getPhotos(): return listdir('photos')
 def getFilename():
     tphotos = getPhotos()
     if len(tphotos) == 0: return '1'
-    else: return str(int(tphotos[-1].replace('.jpg','')) + 1)
+    else: return str(int(tphotos[-1].replace('.jpg','')) + 1) + '.jpg'
 
 def saveFile(file,filename):
     file.save(opjoin(app.config['UPLOAD_FOLDER'], filename))
@@ -40,7 +40,7 @@ def add_photos():
 
         if file:
             for f in file:
-                if f.filename.split('.')[1] != 'zip': saveFile(f,getFilename() + '.jpg')
+                if f.filename.split('.')[1] != 'zip': saveFile(f,getFilename())
                 else:
                     buffer = BytesIO()
                     f.save(buffer)
@@ -53,13 +53,12 @@ def add_photos():
                     print(listdir('temp'))
                     for j in listdir('temp'):
                         print(j)
-                        if isdir(j):
-                            rmtree(opjoin('temp/',j))
+                        if isdir(opjoin('temp', j)):
+                            rmtree(opjoin('temp',j ))
                         else:
-                            filename = getFilename() + '.jpg'
-                            move(opjoin('temp/' + j), 'photos/')
-                            rename(opjoin('photos/' + j),opjoin('photos/' + filename))
-
+                            filename = getFilename()
+                            move(opjoin('temp' + j), 'photos')
+                            rename(opjoin('photos' + j),opjoin('photos' + filename))
 
     return render_template('add_photos.html', photos=len(getPhotos()))
 
