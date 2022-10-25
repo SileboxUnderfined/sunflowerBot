@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, flash
 from os import environ as envv, listdir, mkdir, rename, rmdir
-from shutil import move
+from shutil import move, rmtree
 from os.path import isdir
 from vk_api import VkApi, VkUpload
 from vk_api.utils import get_random_id as rand
@@ -51,7 +51,7 @@ def add_photos():
                         myzip.extractall(path='temp')
 
                     for j in listdir('temp'):
-                        if isdir('temp/' + j): rmdir('temp/' + j)
+                        if isdir('temp/' + j): rmtree('temp/' + j)
                         move('temp/' + j, 'photos')
                         filename = getFilename() + '.jpg'
                         rename('photos/' + j,filename)
