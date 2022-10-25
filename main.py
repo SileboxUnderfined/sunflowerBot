@@ -53,7 +53,7 @@ def add_photos():
                     for j in listdir('temp'):
                         filename = getFilename()
                         rename('temp/' + j,'temp/' + filename + '.jpg')
-                        move('temp/' + filename,'photos')
+                        move('temp/' + filename + '.jpg','photos')
 
     return render_template('add_photos.html', photos=len(getPhotos()))
 
