@@ -40,7 +40,7 @@ def add_photos():
 
         if file:
             for f in file:
-                if f.filename.split('.')[1] != 'zip': saveFile(file,getFilename())
+                if f.filename.split('.')[1] != 'zip': saveFile(f,getFilename())
                 else:
                     buffer = BytesIO()
                     f.save(buffer)
@@ -52,7 +52,7 @@ def add_photos():
 
                     for j in listdir('temp'):
                         filename = getFilename()
-                        rename(j,filename + '.jpg')
+                        rename('temp/' + j,'temp/' + filename + '.jpg')
                         move('temp/' + filename,'photos')
 
     return render_template('add_photos.html', photos=len(getPhotos()))
