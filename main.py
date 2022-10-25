@@ -43,7 +43,7 @@ def add_photos():
                 if f.filename.split('.')[1] != 'zip': saveFile(file,getFilename())
                 else:
                     buffer = BytesIO()
-                    file.save(buffer)
+                    f.save(buffer)
                     buffer.seek(0)
 
                     with ZipFile(buffer,'r') as myzip:
