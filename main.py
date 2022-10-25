@@ -54,8 +54,9 @@ def add_photos():
                         if isdir('temp/' + j):
                             rmtree('temp/' + j)
                             continue
-                        move('temp/' + j, 'photos')
+
                         filename = getFilename() + '.jpg'
+                        move('temp/' + j, 'photos')
                         rename('photos/' + j,filename)
 
 
