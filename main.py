@@ -34,8 +34,9 @@ def add_photos():
             flash('Файла не существует')
 
         file = request.files['photo']
-        if file.filename == '':
-            flash('Файл не выбран')
+        file = [file]
+        """if file.filename == '':
+            flash('Файл не выбран')"""
 
         if file:
             for f in file:
