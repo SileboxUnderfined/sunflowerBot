@@ -51,9 +51,10 @@ def add_photos():
                         myzip.extractall(path='temp')
 
                     for j in listdir('temp'):
-                        filename = getFilename()
-                        rename('temp/' + j,'temp/' + filename + '.jpg')
-                        move('temp/' + filename + '.jpg','photos')
+                        move('temp/' + j, 'photos')
+                        filename = getFilename() + '.jpg'
+                        rename('photos/' + j,'photos/' + filename)
+
 
     return render_template('add_photos.html', photos=len(getPhotos()))
 
