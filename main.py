@@ -53,12 +53,12 @@ def add_photos():
                     print(listdir('temp'))
                     for j in listdir('temp'):
                         print(j)
-                        if isdir(opjoin('temp', j)):
-                            rmtree(opjoin('temp',j ))
+                        if isdir(opjoin('temp/', j)):
+                            rmtree(opjoin('temp/',j))
                         else:
                             filename = getFilename()
-                            move(opjoin('temp' + j), 'photos')
-                            rename(opjoin('photos' + j),opjoin('photos' + filename))
+                            move(opjoin('temp/' + j), 'photos')
+                            rename(opjoin('photos/' + j),opjoin('photos/' + filename))
 
     return render_template('add_photos.html', photos=len(getPhotos()))
 
