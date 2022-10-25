@@ -50,8 +50,10 @@ def add_photos():
                         if not isdir('temp'): mkdir('temp')
                         myzip.extractall(path='temp')
 
+                    print(listdir('temp'))
                     for j in listdir('temp'):
-                        if isdir(opjoin('temp/',j)):
+                        print(j)
+                        if isdir(j):
                             rmtree(opjoin('temp/',j))
                         else:
                             filename = getFilename() + '.jpg'
