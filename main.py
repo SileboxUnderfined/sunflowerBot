@@ -1,5 +1,7 @@
 from flask import Flask, request, render_template, flash
-from os import environ as envv, listdir
+from os import environ as envv, listdir, mkdir, rename
+from shutil import move
+from os.path import isdir
 from vk_api import VkApi, VkUpload
 from vk_api.utils import get_random_id as rand
 from vk_api.keyboard import VkKeyboard
@@ -44,7 +46,13 @@ def add_photos():
                     buffer.seek(0)
 
                     with ZipFile(buffer,'r') as myzip:
-                        myzip.extractall(path='photos')
+                        if not isdir('temp'): mkdir('temp')
+                        myzip.extractall(path='temp')
+
+                    for j in listdir('temp'):
+                        filename = getFilename()
+                        rename(j,filename + '.jpg')
+                        move('temp/' + filename,'photos')
 
     return render_template('add_photos.html', photos=len(getPhotos()))
 
