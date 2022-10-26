@@ -17,8 +17,9 @@ app.config['UPLOAD_FOLDER'] = 'photos'
 def getPhotos(): return listdir('photos')
 def getFilename():
     tphotos = sorted([int(i.replace('.jpg', '')) for i in getPhotos()])
+    result = str(tphotos[-1] + 1) + '.jpg'
     if len(tphotos) == 0: return '1.jpg'
-    else: return str(tphotos[-1] + 1) + '.jpg'
+    else: return result
 
 def saveFile(file,filename):
     file.save(opjoin(app.config['UPLOAD_FOLDER'], filename))
