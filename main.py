@@ -105,4 +105,4 @@ if __name__ in "__main__":
     keyboard.add_line()
     keyboard.add_button('О мне')
 
-    app.run(host=envv['IP_ADDRESS'],port=envv['PORT'],debug=True)
+    app.run(host=envv['IP_ADDRESS'],port=envv['PORT'])
